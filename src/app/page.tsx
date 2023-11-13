@@ -1,4 +1,5 @@
-import {CgPathIntersect} from 'react-icons/cg'
+import {Connections} from "@/components";
+
 
 export default function Home() {
   return (
@@ -20,12 +21,7 @@ export default function Home() {
           Connect with your favorite note-taking app and start using Summarizer today.
         </p>
 
-        <button
-          className="h-11 rounded-md px-4 bg-lime-950 text-white hover:opacity-70 inline-flex items-center justify-center text-sm font-medium ring-offset-white focus-visible:outline-none focus-visible:ring-2
-         focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-        >
-          <CgPathIntersect className="mr-2 text-xl text-white" /> Connect with Simple<b>Notes</b>
-        </button>
+        <Connections />
 
         <p className="text-md">
           Other note-taking apps coming soon.
