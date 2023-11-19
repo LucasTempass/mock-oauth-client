@@ -28,9 +28,7 @@ export async function POST(req: NextRequest) {
 
   const data = await response.json();
 
-  console.log("data", data);
-
-  await kv.set("access_token", data["access_token"]);
+  await kv.set(`access_token:${data["id"]}`, data["access_token"]);
 
   return NextResponse.json({
     message: "ok",

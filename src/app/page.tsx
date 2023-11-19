@@ -2,6 +2,7 @@ import { Connections } from "@/components";
 import { kv } from "@vercel/kv";
 import { CgPathIntersect } from "react-icons/cg";
 import { SummarizeButton } from "@/components/SummarizeButton";
+import { auth } from "@clerk/nextjs";
 
 export interface Note {
   userId: string;
@@ -39,7 +40,9 @@ async function getNotes(accessToken: unknown): Promise<Note[]> {
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const accessToken = await kv.get("access_token");
+  const { userId } = auth();
+
+  const accessToken = await kv.get(`access_token:${userId}`);
 
   const notes: Note[] = await getNotes(accessToken);
 
