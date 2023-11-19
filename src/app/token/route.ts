@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { kv } from "@vercel/kv";
 
 export async function POST(req: NextRequest) {
   const { code } = await req.json();
@@ -28,6 +29,8 @@ export async function POST(req: NextRequest) {
   const data = await response.json();
 
   console.log("data", data);
+
+  await kv.set("access_token", data["access_token"]);
 
   return NextResponse.json({
     message: "ok",

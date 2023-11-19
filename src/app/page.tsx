@@ -1,32 +1,41 @@
-import {Connections} from "@/components";
+import { Connections } from "@/components";
+import { kv } from "@vercel/kv";
 
+async function getNotes(accessToken: unknown): Promise<object[]> {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_RESOURCE_URL}/note`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
-export default function Home() {
+  console.log("notes response", response);
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const notes = await response.json();
+
+  console.log("notes", notes);
+
+  return notes;
+}
+
+export default async function Home() {
+  const accessToken = await kv.get("access_token");
+
+  const notes: object[] = accessToken ? await getNotes(accessToken) : [];
+
   return (
-    <main className="flex min-h-screen flex-col items-center p-24 space-y-12">
-      <h1 className="text-4xl font-bold">
-        Summarize your notes with <b className="font-extrabold text-lime-950">Summarizer</b>
-      </h1>
+    <div className="flex flex-col items-center py-4 px-8 border border-lime-950 justify-center space-y-4 flex-1 bg-white border-dashed rounded">
+      <p className="text-2xl text-center ">
+        Connect with your favorite note-taking app and start using Summarizer
+        today.
+      </p>
 
-      <div className="flex flex-col items-center justify-center space-y-4">
-        <p className="text-xl text-center ">
-          Summarizer is a tool that summarizes your notes in a few sentences.
-          <br />
-          It uses AI to understand their context and extract the most relevant and important information.
-        </p>
-      </div>
+      {!accessToken && <Connections />}
 
-      <div className="flex flex-col items-center py-4 px-8 border border-lime-950 justify-center space-y-4 flex-1 bg-white border-dashed rounded">
-        <p className="text-2xl text-center ">
-          Connect with your favorite note-taking app and start using Summarizer today.
-        </p>
-
-        <Connections />
-
-        <p className="text-md">
-          Other note-taking apps coming soon.
-        </p>
-      </div>
-    </main>
-  )
+      <p className="text-md">Other note-taking apps coming soon.</p>
+    </div>
+  );
 }
