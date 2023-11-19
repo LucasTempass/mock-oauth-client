@@ -4,12 +4,10 @@ import { CgPathIntersect } from "react-icons/cg";
 
 export function Connections() {
   const onClick = () => {
-    // TODO implementar conexão com o SimpleNotes
     const url = new URL(process.env.NEXT_PUBLIC_AUTHORIZE_URL as string);
 
     const searchParams = new URLSearchParams({
-      client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-      redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI as string,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID as string,
       scope: "read",
     });
 
