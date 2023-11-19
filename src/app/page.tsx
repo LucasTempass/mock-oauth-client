@@ -21,6 +21,8 @@ async function getNotes(accessToken: unknown): Promise<object[]> {
   return notes;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const accessToken = await kv.get("access_token");
 
