@@ -1,7 +1,7 @@
 import { Connections } from "@/components";
 import { kv } from "@vercel/kv";
 import { CgPathIntersect } from "react-icons/cg";
-import { Button } from "@/components/Button";
+import { SummarizeButton } from "@/components/SummarizeButton";
 
 export interface Note {
   userId: string;
@@ -17,6 +17,7 @@ async function getNotes(accessToken: unknown): Promise<Note[]> {
   }
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_RESOURCE_URL}/note`, {
+    cache: "no-store",
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -80,7 +81,7 @@ export default async function Home() {
                     </div>
                   </div>
 
-                  <Button className="w-full">Summarize</Button>
+                  <SummarizeButton />
                 </div>
               ))}
             </div>
