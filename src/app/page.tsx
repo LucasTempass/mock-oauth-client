@@ -35,7 +35,19 @@ export default async function Home() {
         today.
       </p>
 
-      {!accessToken && <Connections />}
+      {accessToken ? (
+        <div>
+          <h2>Notes</h2>
+
+          <div>
+            {notes.map((note: any) => (
+              <div key={note.id}>{note.id}</div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <Connections />
+      )}
 
       <p className="text-md">Other note-taking apps coming soon.</p>
     </div>
