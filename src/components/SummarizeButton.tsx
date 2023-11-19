@@ -7,7 +7,7 @@ export function SummarizeButton() {
     <Button
       className="w-full"
       onClick={() => {
-        alert("Está funcionalidade não está disponível no momento.");
+        alert("This feature is not yet available.");
       }}
     >
       Summarize

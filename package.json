@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.27.1",
     "@vercel/kv": "^1.0.0",
     "class-variance-authority": "^0.7.0",
     "next": "14.0.2",
